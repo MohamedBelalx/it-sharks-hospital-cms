@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['doctor', 'patient', 'nurse', 'pharmacy', 'admin']);
+            $table->enum('gender', ['male', 'female']);
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('department');
             $table->rememberToken();
             $table->timestamps();
         });
