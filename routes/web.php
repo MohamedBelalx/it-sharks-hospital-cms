@@ -20,5 +20,9 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'department'], function () {
-    Route::get('/create', [DepartmentController::class, 'create'])->name('create');
+    Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');
+    Route::get('/index', [DepartmentController::class, 'index'])->name('department.index');
+    Route::get('/edit', [DepartmentController::class, 'edit'])->name('department.edit');
+    Route::get('/destroy', [DepartmentController::class, 'destroy'])->name('department.destroy');
+
 });

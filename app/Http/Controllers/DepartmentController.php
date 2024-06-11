@@ -11,7 +11,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.department.index');
     }
 
     /**
@@ -43,7 +43,7 @@ class DepartmentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('dashboard.department.edit');
     }
 
     /**
@@ -60,5 +60,6 @@ class DepartmentController extends Controller
     public function destroy(string $id)
     {
         //
+        return redirect()->back();
     }
 }
