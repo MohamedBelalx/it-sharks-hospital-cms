@@ -1,9 +1,12 @@
 <?php
+
 namespace App\DTO;
-Class SurgeryDTO extends Data
+
+use Spatie\LaravelData\Data;
+
+class SurgeryDTO extends Data
 {
-    public function __construct()
+    public function __construct(public string $name, public string $time, public string $doctor_id)
     {
     }
 }
-?>

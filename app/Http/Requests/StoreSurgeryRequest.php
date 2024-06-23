@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSurgeryRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreSurgeryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,10 @@ class StoreSurgeryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'time' => 'required',
+            'doctor_id' => 'required',
+            'nurse_id' => 'required'
         ];
     }
 }

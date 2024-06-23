@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             @csrf
-            <form method="POST" action="{{ route('visit.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('surgery.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>

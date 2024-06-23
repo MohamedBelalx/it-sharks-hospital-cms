@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\SurgeryDTO;
 use App\Enums\Roles;
 use App\Models\Surgery;
 use App\Http\Requests\StoreSurgeryRequest;
@@ -33,7 +34,7 @@ class SurgeryController extends Controller
     {
         $doctors = $this->userRepository->getByRole(Roles::DOCTOR);
         $nurse = $this->userRepository->getByRole(Roles::NURSE);
-        return view('dashboard.surgery.create',[
+        return view('dashboard.surgery.create', [
             'doctors' => $doctors,
             'nurse' => $nurse
         ]);
@@ -44,7 +45,8 @@ class SurgeryController extends Controller
      */
     public function store(StoreSurgeryRequest $request)
     {
-        //
+        $this->surgeryRepository->create(SurgeryDTO::from($request->all()));
+        return redirect()->route('surgery.index');
     }
 
     /**
