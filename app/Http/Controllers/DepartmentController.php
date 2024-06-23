@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\DepartmentDTO;
+use App\Http\Requests\DepartmentRequest;
+use App\Repository\Interface\IDepartmentRepository;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    protected $department;
+    public function __construct(IDepartmentRepository $DepartmentRepository)
+    {
+        $this->department = $DepartmentRepository;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.department.index');
+        $departments = $this->department->getAll();
+        return view('dashboard.department.index',['departments' => $departments]);
     }
 
     /**
@@ -25,17 +34,11 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DepartmentRequest $departmentRequest)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $departmentDTO = DepartmentDTO::from($departmentRequest->all());
+        $this->department->store($departmentDTO);
+        return redirect()->route("department.index");
     }
 
     /**
@@ -43,15 +46,18 @@ class DepartmentController extends Controller
      */
     public function edit(string $id)
     {
-        return view('dashboard.department.edit');
+        $selectedDepartment = $this->department->getById($id);
+        return view('dashboard.department.edit',['department'=>$selectedDepartment]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(DepartmentRequest $departmentRequest, string $id)
     {
-        //
+        $departmentDTO = DepartmentDTO::from($departmentRequest->all());
+        $this->department->update($departmentDTO,$id);
+        return redirect()->route("department.index");
     }
 
     /**
@@ -59,7 +65,7 @@ class DepartmentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->department->delete($id);
         return redirect()->back();
     }
 }
