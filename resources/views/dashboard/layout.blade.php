@@ -106,6 +106,19 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesurgery" aria-expanded="true" aria-controls="collapsesurgery">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Surgery</span>
+                </a>
+                <div id="collapsesurgery" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('surgery.create')}}">Create</a>
+                        <a class="collapse-item" href="{{route('surgery.index')}}">Show</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 

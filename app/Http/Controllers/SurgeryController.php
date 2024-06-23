@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Roles;
 use App\Models\Surgery;
 use App\Http\Requests\StoreSurgeryRequest;
 use App\Http\Requests\UpdateSurgeryRequest;
+use App\Repository\Interface\IUserRepository;
+use App\Repository\Interface\ISurgeryRepository;
 
 class SurgeryController extends Controller
 {
+    protected $userRepository;
+    protected $surgeryRepository;
+    public function __construct(IUserRepository $userRepository, ISurgeryRepository $surgeryRepository)
+    {
+        $this->userRepository = $userRepository;
+        $this->surgeryRepository = $surgeryRepository;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +31,12 @@ class SurgeryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.surgery.create');
+        $doctors = $this->userRepository->getByRole(Roles::DOCTOR);
+        $nurse = $this->userRepository->getByRole(Roles::NURSE);
+        return view('dashboard.surgery.create',[
+            'doctors' => $doctors,
+            'nurse' => $nurse
+        ]);
     }
 
     /**

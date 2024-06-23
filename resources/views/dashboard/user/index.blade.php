@@ -23,7 +23,7 @@
                             
                         <tr>
                             <td>{{$user->name}}</td>
-                            <td>{{$user->description}}</td>
+                            <td>{{$user->role}}</td>
                             <td>{{$user->email}}</td>
                             <td>
                                 <img src="{{asset($user->image)}}" alt="" width="100px" height="100px">
