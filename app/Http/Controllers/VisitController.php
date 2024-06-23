@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\VisitDTO;
 use Illuminate\Http\Request;
 use App\Repository\Interface\IUserRepository;
 use App\Enums\Roles;
+use App\Http\Requests\VisitRequest;
+use App\Repository\Interface\IVisitRepository;
 
 class VisitController extends Controller
 {
     protected $userRepository;
-    public function __construct(IUserRepository $userRepository)
+    protected $visitRepository;
+    public function __construct(IUserRepository $userRepository, IVisitRepository $visitRepository)
     {
         $this->userRepository = $userRepository;
+        $this->visitRepository = $visitRepository;
     }
     /**
      * Display a listing of the resource.
@@ -41,9 +46,10 @@ class VisitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VisitRequest $visitRequest)
     {
-        //
+        $this->visitRepository->create(VisitDTO::from($visitRequest->all()));
+        return redirect()->route('visit.index');
     }
 
     /**

@@ -11,7 +11,7 @@ class VisitRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class VisitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'time' => 'required',
+            'doctor_id' => 'required',
+            'patient_id' => 'required',
+            'nurse_id' => 'required'
         ];
     }
 }

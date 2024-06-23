@@ -15,7 +15,7 @@
                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Time') }}</label>
 
                     <div class="col-md-6">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="time" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="datetime-local" class="form-control @error('name') is-invalid @enderror" name="time" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                         @error('time')
                         <span class="invalid-feedback" role="alert">
@@ -27,11 +27,11 @@
 
 
                 <div class="row mb-3">
-                    <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('user') }}</label>
+                    <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Doctor') }}</label>
 
                     <div class="col-md-6">
                         <select name="doctor_id" id="" class="form-control">
-                            <option disabled selected>pick user</option>
+                            <option disabled selected>pick doctor</option>
 
                             @foreach($doctors as $user)
                             <option value="{{$user->id}}">{{$user->name}}</option>
@@ -46,11 +46,11 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('user') }}</label>
+                    <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Nurse') }}</label>
 
                     <div class="col-md-6">
                         <select name="nurse_id" id="" class="form-control">
-                            <option disabled selected>pick user</option>
+                            <option disabled selected>pick nurse</option>
 
                             @foreach($nurse as $user)
                             <option value="{{$user->id}}">{{$user->name}}</option>
@@ -64,11 +64,11 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('user') }}</label>
+                    <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('patient') }}</label>
 
                     <div class="col-md-6">
                         <select name="patient_id" id="" class="form-control">
-                            <option disabled selected>pick user</option>
+                            <option disabled selected>pick patient</option>
 
                             @foreach($patient as $user)
                             <option value="{{$user->id}}">{{$user->name}}</option>

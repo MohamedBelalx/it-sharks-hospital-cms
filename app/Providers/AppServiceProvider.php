@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Repository\DepartmentRepository;
 use App\Repository\Interface\IDepartmentRepository;
 use App\Repository\Interface\IUserRepository;
+use App\Repository\Interface\IVisitRepository;
 use App\Repository\UserRepository;
+use App\Repository\VisitRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(IDepartmentRepository::class, DepartmentRepository::class);
         $this->app->singleton(IUserRepository::class, UserRepository::class);
+        $this->app->singleton(IVisitRepository::class, VisitRepository::class);
     }
 
     /**
