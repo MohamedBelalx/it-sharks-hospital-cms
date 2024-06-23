@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\UserDTO;
 use App\Http\Requests\UserRequest;
 use App\Repository\Interface\IUserRepository;
 use Illuminate\Http\Request;
+use App\Repository\Interface\IDepartmentRepository;
 
-class UserContrller extends Controller
+class UserController extends Controller
 {
-    protected $user;
-    public function __construct(IUserRepository $userRepository)
+    protected $userRepository;
+    protected $departmentRepository;
+    public function __construct(IUserRepository $userRepository, IDepartmentRepository $departmentRepository)
     {
-        $this->user = $userRepository;
+        $this->userRepository = $userRepository;
+        $this->departmentRepository = $departmentRepository;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = $this->user->getAll();
+        $users = $this->userRepository->getAll();
         return view('dashboard.user.index', compact('users'));
     }
 
@@ -27,7 +31,8 @@ class UserContrller extends Controller
      */
     public function create()
     {
-        return view('dashboard.users.create');
+        $departments = $this->departmentRepository->getAll();
+        return view('dashboard.user.create', ['departments' => $departments]);
     }
 
     /**
@@ -35,7 +40,9 @@ class UserContrller extends Controller
      */
     public function store(UserRequest $userRequest)
     {
-        //
+        $user = UserDTO::handleInputs($userRequest);
+        $this->userRepository->create($user);
+        return redirect()->route('user.index');
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
 class UserRequest extends FormRequest
 {
     /**
@@ -27,8 +27,15 @@ class UserRequest extends FormRequest
             'password' => 'required',
             'role' => 'required',
             'gender' => 'required',
-            'image' => 'rewuired|string|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
             'department_id' => 'required',
         ];
     }
+    
+    protected function failedValidation(Validator $validator) {
+        // Perform your response 
+        // by default it will throw ValidationException.
+        dd($validator);
+    }
+    
 }

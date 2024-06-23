@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\UserContrller;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,12 +30,12 @@ Route::group(['prefix' => 'department'], function () {
 });
 
 Route::group(['prefix' => 'users'], function () {
-    Route::get('/create', [UserContrller::class, 'create'])->name('user.create');
-    Route::get('/index', [UserContrller::class, 'index'])->name('user.index');
-    Route::get('/edit/{id}', [UserContrller::class, 'edit'])->name('user.edit');
-    Route::get('/destroy/{id}', [UserContrller::class, 'destroy'])->name('user.destroy');
-    Route::post('/store',[UserContrller::class, 'store'])->name('user.store');
-    Route::post('/update/{id}',[UserContrller::class, 'update'])->name('user.update');
+    Route::get('/create', [UserController::class, 'create'])->name('user.create');
+    Route::get('/index', [UserController::class, 'index'])->name('user.index');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::post('/store',[UserController::class, 'store'])->name('user.store');
+    Route::post('/update/{id}',[UserController::class, 'update'])->name('user.update');
 });
 
 Auth::routes();

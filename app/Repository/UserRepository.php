@@ -16,6 +16,7 @@ use App\Repository\Interface\IUserRepository;
         public function create($request)
         {
             // TODO: Implement create() method.
+            return User::create($request);
         }
         public function update( $request,$id)
         {
