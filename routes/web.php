@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,14 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/store',[UserController::class, 'store'])->name('user.store');
     Route::post('/update/{id}',[UserController::class, 'update'])->name('user.update');
 });
-
+Route::group(['prefix' => 'visits'], function () {
+    Route::get('/create', [VisitController::class, 'create'])->name('visit.create');
+    Route::get('/index', [VisitController::class, 'index'])->name('visit.index');
+    Route::get('/edit/{id}', [VisitController::class, 'edit'])->name('visit.edit');
+    Route::get('/destroy/{id}', [VisitController::class, 'destroy'])->name('visit.destroy');
+    Route::post('/store',[VisitController::class, 'store'])->name('visit.store');
+    Route::post('/update/{id}',[VisitController::class, 'update'])->name('visit.update');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

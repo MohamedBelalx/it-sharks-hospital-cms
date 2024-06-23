@@ -94,6 +94,18 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsevisit" aria-expanded="true" aria-controls="collapsevisit">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Visits</span>
+                </a>
+                <div id="collapsevisit" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('visit.create')}}">Create</a>
+                        <a class="collapse-item" href="{{route('visit.index')}}">Show</a>
+                    </div>
+                </div>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
