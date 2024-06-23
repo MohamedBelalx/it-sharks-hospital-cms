@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('nurse_id');
             $table->unsignedBigInteger('surgery_id');
             $table->foreign('nurse_id')->references('id')->on('users');
-            $table->foreign('surgery_id')->references('id')->on('surgery');
+            $table->foreign('surgery_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
