@@ -24,7 +24,8 @@ class VisitController extends Controller
 
     public function index()
     {
-        //
+        $visits = $this->visitRepository->getAll();
+        return view('dashboard.visit.index', ['visits', $visits]);
     }
 
     /**
