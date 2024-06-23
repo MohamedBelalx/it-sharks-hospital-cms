@@ -4,7 +4,7 @@
     <!-- Basic Card Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Show Department</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Show Users</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -12,20 +12,26 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Description</th>
+                            <th>Role</th>
+                            <th>Email</th>
+                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($departments as $department)
+                        @foreach ($users as $user)
                             
                         <tr>
-                            <td>{{$department->name}}</td>
-                            <td>{{$department->description}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->description}}</td>
+                            <td>{{$user->email}}</td>
                             <td>
-                                <a href="{{route('department.edit',$department->id)}}" class="text-decoration-none"> <i class="fa-solid fa-pen mr-3"></i>
+                                <img src="{{asset('storage/'.$user->image)}}" alt="" width="100px" height="100px">
+                            </td>
+                            <td>
+                                <a href="{{route('user.edit',$user->id)}}" class="text-decoration-none"> <i class="fa-solid fa-pen mr-3"></i>
                                 </a>
-                                <a href="{{route('department.destroy',$department->id)}}" class="text-decoration-none"> <i class="fa-solid fa-trash"></i>
+                                <a href="{{route('user.destroy',$user->id)}}" class="text-decoration-none"> <i class="fa-solid fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
