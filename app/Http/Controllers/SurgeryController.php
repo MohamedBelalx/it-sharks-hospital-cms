@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\NurseSurgeryDTO;
 use App\DTO\SurgeryDTO;
 use App\Enums\Roles;
 use App\Models\Surgery;
@@ -24,7 +25,8 @@ class SurgeryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.surgery.index');
+        $surgeries = $this->surgeryRepository->getAll();
+        return view('dashboard.surgery.index', ['surgeries'=> $surgeries]);
     }
 
     /**
@@ -45,7 +47,8 @@ class SurgeryController extends Controller
      */
     public function store(StoreSurgeryRequest $request)
     {
-        $this->surgeryRepository->create(SurgeryDTO::from($request->all()));
+        // dd($request->nurse_id);
+        $this->surgeryRepository->create(SurgeryDTO::from($request->all()),NurseSurgeryDTO::from($request->all()));
         return redirect()->route('surgery.index');
     }
 
@@ -68,7 +71,7 @@ class SurgeryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSurgeryRequest $request, Surgery $surgery)
+    public function update(StoreSurgeryRequest $request, Surgery $surgery)
     {
         //
     }

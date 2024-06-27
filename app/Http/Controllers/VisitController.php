@@ -25,7 +25,10 @@ class VisitController extends Controller
     public function index()
     {
         $visits = $this->visitRepository->getAll();
-        return view('dashboard.visit.index', ['visits', $visits]);
+        // dd($visits);
+        return view('dashboard.visit.index', [
+            'visits' => $visits
+        ]);
     }
 
     /**
@@ -66,15 +69,26 @@ class VisitController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $visits = $this->visitRepository->getById($id);
+        $doctors = $this->userRepository->getByRole(Roles::DOCTOR);
+        $patient = $this->userRepository->getByRole(Roles::PATIENT);
+        $nurse = $this->userRepository->getByRole(Roles::NURSE);
+        return view('dashboard.visit.edit', [
+            'visit' => $visits,
+            'doctors' => $doctors,
+            'patient' => $patient,
+            'nurse' => $nurse
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(VisitRequest $request, string $id)
     {
-        //
+        
+        $this->visitRepository->update(VisitDTO::from($request->all()), $id);
+        return redirect()->route('visit.index');
     }
 
     /**
@@ -82,6 +96,7 @@ class VisitController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->visitRepository->delete($id);
+        return redirect()->back();
     }
 }

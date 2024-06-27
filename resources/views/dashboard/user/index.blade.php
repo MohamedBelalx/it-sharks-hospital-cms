@@ -26,7 +26,7 @@
                             <td>{{$user->role}}</td>
                             <td>{{$user->email}}</td>
                             <td>
-                                <img src="{{asset($user->image)}}" alt="" width="100px" height="100px">
+                                <img src="{{asset($user->image)}}" class="img-thumbnail" alt="" width="100px" height="100px">
                             </td>
                             <td>
                                 <a href="{{route('user.edit',$user->id)}}" class="text-decoration-none"> <i class="fa-solid fa-pen mr-3"></i>
