@@ -63,24 +63,39 @@ class SurgeryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Surgery $surgery)
+    public function edit(string $id)
     {
-        //
+        $doctors = $this->userRepository->getByRole(Roles::DOCTOR);
+        $nurses = $this->userRepository->getByRole(Roles::NURSE);
+        $surgery = $this->surgeryRepository->getById($id);
+        $nursesForSurgery = $this->surgeryRepository->getNurseBySurgery($surgery->id)->toArray();
+        return view(
+            'dashboard.surgery.edit',
+            [
+                'doctors' => $doctors,
+                'nurses' => $nurses,
+                'surgery' => $surgery,
+                'nursesForSurgery' => $nursesForSurgery[0]['nurse_id']
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreSurgeryRequest $request, Surgery $surgery)
+    public function update(StoreSurgeryRequest $request, string $id)
     {
-        //
+
+        $this->surgeryRepository->update(SurgeryDTO::from($request->all()), NurseSurgeryDTO::from($request->all()), $id);
+        return redirect()->route('surgery.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Surgery $surgery)
+    public function destroy(string $id)
     {
-        //
+        $this->surgeryRepository->delete($id);
+        return redirect()->route('surgery.index');
     }
 }

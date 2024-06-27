@@ -6,14 +6,12 @@ use App\DTO\NurseSurgeryDTO;
 use App\DTO\SurgeryDTO;
 use App\Models\Nurse_Surgery;
 use App\Models\Surgery;
-use App\Models\Visit;
 use App\Repository\Interface\ISurgeryRepository;
 
 class SurgeryRepository implements ISurgeryRepository
 {
     public function create(SurgeryDTO $surgery,NurseSurgeryDTO $nurseSurgeryDTO)
     {
-        // dd($nurseSurgeryDTO);
         Surgery::create($surgery->toArray());
         $surgeryId = Surgery::latest()->first()->id;
         Nurse_Surgery::create($nurseSurgeryDTO->toArray()+['surgery_id'=>$surgeryId]);
@@ -29,17 +27,28 @@ class SurgeryRepository implements ISurgeryRepository
 
     public function getById($id)
     {
-        return Surgery::find($id);
+        return Surgery::findOrFail($id);
     }
 
-    public function update(SurgeryDTO $surgery, string $id)
+    public function getNurseBySurgery(string $id)
     {
-        return Surgery::find($id)->update($surgery->toArray());
+        return Nurse_Surgery::where('surgery_id',$id)->get('nurse_surgery.nurse_id');
+    }
+
+    public function update(SurgeryDTO $surgery, NurseSurgeryDTO $nurseSurgeryDTO, string $id)
+    {
+        Surgery::find($id)->update($surgery->toArray());
+        Nurse_Surgery::where('surgery_id',$id)->delete();
+        Nurse_Surgery::create($nurseSurgeryDTO->toArray()+['surgery_id'=>$id]);
+        return true;
     }
 
     public function delete(string $id)
     {
-        return Surgery::find($id)->delete();
+        Nurse_Surgery::where('surgery_id',$id)->delete();
+        Surgery::find($id)->delete();
+        return true;
     }
+
 
 }
