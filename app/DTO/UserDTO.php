@@ -19,12 +19,11 @@ class UserDTO extends Data
         $this->password = bcrypt($password);
     }
 
-    public static function handleInputs(UserRequest $userRequest): array
+    public static function handleInputs(UserRequest $userRequest)
     {
         $data =  [
             'name' => $userRequest->name,
             'email' => $userRequest->email,
-            'password' => $userRequest->password,
             'department_id' => $userRequest->department_id,
             'role' => $userRequest->role,
             'gender' => $userRequest->gender,
@@ -34,6 +33,9 @@ class UserDTO extends Data
             $newImageName = time() . $image->getClientOriginalName();
             $image->move('img/userImages/', $newImageName);
             $data['image'] = 'img/userImages/' . $newImageName;
+        }
+        if($userRequest->password){
+            $data['password'] = $userRequest->password;
         }
         return $data;
     }

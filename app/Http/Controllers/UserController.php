@@ -46,27 +46,23 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $user = $this->userRepository->getById($id);
+        $departments = $this->departmentRepository->getAll();
+        return view('dashboard.user.edit',['user' => $user, 'departments' => $departments]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
-        //
+        $user = UserDTO::handleInputs($request);
+        $this->userRepository->update($user, $id);
+        return redirect()->route('user.index');
     }
 
     /**
@@ -74,6 +70,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->userRepository->delete($id);
+        return redirect()->back();
     }
 }

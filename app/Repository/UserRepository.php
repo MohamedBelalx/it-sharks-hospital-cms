@@ -2,10 +2,10 @@
 
 namespace App\Repository;
 
+use App\DTO\UserDTO;
 use App\Enums\Roles;
 use App\Models\User;
 use App\Repository\Interface\IUserRepository;
-use Illuminate\Support\Facades\DB;
 class UserRepository implements IUserRepository
 {
     public function getAll()
@@ -15,27 +15,25 @@ class UserRepository implements IUserRepository
     public function getById($id)
     {
         // TODO: Implement getById() method.
+        return User::findOrFail($id);
     }
     public function create($request)
     {
         // TODO: Implement create() method.
         return User::create($request);
     }
-    public function update($request, $id)
+    public function update(array $request,string $id)
     {
         // TODO: Implement update() method.
+        return User::findOrFail($id)->where('id',$id)->update($request);
     }
-    public function delete($id)
+    public function delete(string $id)
     {
         // TODO: Implement delete() method.
+        return User::findOrFail($id)->where('id',$id)->delete();
     }
     public function getByRole(Roles $role)
     {
-        // return match ($role) {
-        //     Roles::doctor      =>    User::where('role', Roles::doctor),
-        //     Roles::patient    =>    User::where('role', Roles::patient),
-        //     Roles::nurse            =>    User::where('role', Roles::nurse)
-        // };
         return User::where('role',$role->value)->get();
     }
 }

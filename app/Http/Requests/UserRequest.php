@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'string',
             'role' => 'required',
             'gender' => 'required',
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
@@ -32,10 +32,8 @@ class UserRequest extends FormRequest
         ];
     }
     
-    protected function failedValidation(Validator $validator) {
-        // Perform your response 
-        // by default it will throw ValidationException.
-        dd($validator);
-    }
+    // protected function failedValidation(Validator $validator) {
+    //     dd($validator);
+    // }
     
 }
