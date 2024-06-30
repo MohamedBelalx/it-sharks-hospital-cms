@@ -69,6 +69,7 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
+            @if($user->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartment" aria-expanded="true" aria-controls="collapseDepartment">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -93,6 +94,8 @@
                     </div>
                 </div>
             </li>
+            @else
+            @if($user->role == 'patient')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsevisit" aria-expanded="true" aria-controls="collapsevisit">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -105,6 +108,7 @@
                     </div>
                 </div>
             </li>
+            @else
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesurgery" aria-expanded="true" aria-controls="collapsesurgery">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -130,6 +134,9 @@
                     </div>
                 </div>
             </li>
+            @endif
+            @endif
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -323,6 +330,8 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{asset($user->image)}}" width="40" class="rounded-circle" alt="">
+                                {{$user->name}}
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -341,7 +350,14 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </a>
                             </div>
                         </li>

@@ -18,7 +18,7 @@ use App\Http\Controllers\PharmacyController;
 |
 */
 
-Route::get('/dashboard', [UserController::class, 'main']);
+Route::get('/dashboard', [UserController::class, 'main'])->name('dashboard');
 Route::get('/', [MainController::class, 'index']);
 
 Route::group(['prefix' => 'department'], function () {

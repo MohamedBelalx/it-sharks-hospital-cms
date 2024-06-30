@@ -28,7 +28,7 @@
 
 <body>
     <!-- ? Preloader Start -->
-   
+
     <!-- Preloader Start -->
     <header>
         <!--? Header Start -->
@@ -64,7 +64,19 @@
                                     </nav>
                                 </div>
                                 <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="#" class="btn header-btn">01654.066.456</a>
+                                    @auth
+                                    <a href="{{route('dashboard')}}" class="btn header-btn">
+                                        Dashboard
+                                    </a>
+                                    @else
+                                    <a href="{{route('register')}}" class="btn header-btn">
+                                        Register
+                                    </a>
+                                    <a href="{{route('login')}}" class="btn header-btn">
+                                        Login
+                                    </a>
+                                    @endauth
+
                                 </div>
                             </div>
                         </div>
@@ -442,26 +454,26 @@
                 </div>
                 <div class="row">
                     <!-- single Tem -->
-                     @foreach($users as $user)
-                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-">
-                         <div class="single-team mb-30">
-                             <div class="team-img">
-                                 <img src="{{asset($user->image)}}" alt="">
-                             </div>
-                             <div class="team-caption">
-                                 <h3><a href="#">{{$user->name}}</a></h3>
-                                 <span>{{$user->role}}</span>
-                                 <!-- Team social -->
-                                 <div class="team-social">
-                                     <a href="#"><i class="fab fa-twitter"></i></a>
-                                     <a href="#"><i class="fas fa-globe"></i></a>
-                                     <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                     <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     @endforeach
+                    @foreach($users as $user)
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-">
+                        <div class="single-team mb-30">
+                            <div class="team-img">
+                                <img src="{{asset($user->image)}}" alt="">
+                            </div>
+                            <div class="team-caption">
+                                <h3><a href="#">{{$user->name}}</a></h3>
+                                <span>{{$user->role}}</span>
+                                <!-- Team social -->
+                                <div class="team-social">
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fas fa-globe"></i></a>
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-">
                         <div class="single-team mb-30">
                             <div class="team-img">

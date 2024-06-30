@@ -17,7 +17,7 @@ class MainController extends Controller
     {
         $users = $this->userRepository->getwithLimitAndRole(Roles::DOCTOR, 3);
 
-        return view('main.index', [
+        return view('main.index',[
             'users' => $users
         ]);
     }

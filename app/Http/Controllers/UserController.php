@@ -8,6 +8,7 @@ use App\Repository\Interface\IUserRepository;
 use Illuminate\Http\Request;
 use App\Repository\Interface\IDepartmentRepository;
 use App\Enums\Roles;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -33,12 +34,13 @@ class UserController extends Controller
         $nurse = $this->userRepository->getCount(Roles::NURSE);
         $patient = $this->userRepository->getCount(Roles::PATIENT);
         $pharmacy = $this->userRepository->getCount(Roles::PHARMACY);
-
+        $authUser = $this->userRepository->getById(Auth::id());
         return view('dashboard.index', [
             'doctor' => $doctor,
             'nurse' => $nurse,
             'patient' => $patient,
-            'pharmacy' => $pharmacy
+            'pharmacy' => $pharmacy,
+            'user' => $authUser
         ]);
     }
     /**
