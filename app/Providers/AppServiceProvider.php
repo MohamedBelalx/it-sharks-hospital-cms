@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Repository\DepartmentRepository;
 use App\Repository\Interface\IDepartmentRepository;
+use App\Repository\Interface\IPharmacyRepository;
 use App\Repository\Interface\ISurgeryRepository;
 use App\Repository\Interface\IUserRepository;
 use App\Repository\Interface\IVisitRepository;
+use App\Repository\PharmacyRepository;
 use App\Repository\SurgeryRepository;
 use App\Repository\UserRepository;
 use App\Repository\VisitRepository;
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(IUserRepository::class, UserRepository::class);
         $this->app->singleton(IVisitRepository::class, VisitRepository::class);
         $this->app->singleton(ISurgeryRepository::class, SurgeryRepository::class);
+        $this->app->singleton(IPharmacyRepository::class, PharmacyRepository::class);
     }
 
     /**

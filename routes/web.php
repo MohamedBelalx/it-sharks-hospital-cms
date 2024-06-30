@@ -5,7 +5,7 @@ use App\Http\Controllers\SurgeryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PharmacyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +52,15 @@ Route::group(['prefix' => 'surgery'], function () {
     Route::get('/destroy/{id}', [SurgeryController::class, 'destroy'])->name('surgery.destroy');
     Route::post('/store', [SurgeryController::class, 'store'])->name('surgery.store');
     Route::post('/update/{id}', [SurgeryController::class, 'update'])->name('surgery.update');
+});
+
+Route::group(['prefix' => 'pharmacy'], function () {
+    Route::get('/create', [PharmacyController::class, 'create'])->name('pharmacy.create');
+    Route::get('/index', [PharmacyController::class, 'index'])->name('pharmacy.index');
+    Route::get('/edit/{id}', [PharmacyController::class, 'edit'])->name('pharmacy.edit');
+    Route::get('/destroy/{id}', [PharmacyController::class, 'destroy'])->name('pharmacy.destroy');
+    Route::post('/store', [PharmacyController::class, 'store'])->name('pharmacy.store');
+    Route::post('/update/{id}', [PharmacyController::class, 'update'])->name('pharmacy.update');
 });
 Auth::routes();
 
