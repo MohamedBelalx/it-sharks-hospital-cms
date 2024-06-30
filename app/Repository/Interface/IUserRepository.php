@@ -12,4 +12,5 @@ use App\Enums\Roles;
         public function update(array $request,string $id);
         public function delete(string $id);
         public function getByRole(Roles $role);
+        public function getCount(Roles $role);
     }

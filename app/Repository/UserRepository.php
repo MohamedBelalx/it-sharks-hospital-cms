@@ -6,6 +6,7 @@ use App\DTO\UserDTO;
 use App\Enums\Roles;
 use App\Models\User;
 use App\Repository\Interface\IUserRepository;
+
 class UserRepository implements IUserRepository
 {
     public function getAll()
@@ -22,18 +23,22 @@ class UserRepository implements IUserRepository
         // TODO: Implement create() method.
         return User::create($request);
     }
-    public function update(array $request,string $id)
+    public function update(array $request, string $id)
     {
         // TODO: Implement update() method.
-        return User::findOrFail($id)->where('id',$id)->update($request);
+        return User::findOrFail($id)->where('id', $id)->update($request);
     }
     public function delete(string $id)
     {
         // TODO: Implement delete() method.
-        return User::findOrFail($id)->where('id',$id)->delete();
+        return User::findOrFail($id)->where('id', $id)->delete();
     }
     public function getByRole(Roles $role)
     {
-        return User::where('role',$role->value)->get();
+        return User::where('role', $role->value)->get();
+    }
+    public function getCount(Roles $role)
+    {
+        return User::where('role', $role->value)->count();
     }
 }

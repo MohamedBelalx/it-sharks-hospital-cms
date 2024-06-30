@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Repository\Interface\IUserRepository;
 use Illuminate\Http\Request;
 use App\Repository\Interface\IDepartmentRepository;
+use App\Enums\Roles;
 
 class UserController extends Controller
 {
@@ -26,6 +27,20 @@ class UserController extends Controller
         return view('dashboard.user.index', compact('users'));
     }
 
+    public function main()
+    {
+        $doctor = $this->userRepository->getCount(Roles::DOCTOR);
+        $nurse = $this->userRepository->getCount(Roles::NURSE);
+        $patient = $this->userRepository->getCount(Roles::PATIENT);
+        $pharmacy = $this->userRepository->getCount(Roles::PHARMACY);
+
+        return view('dashboard.index', [
+            'doctor' => $doctor,
+            'nurse' => $nurse,
+            'patient' => $patient,
+            'pharmacy' => $pharmacy
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -52,7 +67,7 @@ class UserController extends Controller
     {
         $user = $this->userRepository->getById($id);
         $departments = $this->departmentRepository->getAll();
-        return view('dashboard.user.edit',['user' => $user, 'departments' => $departments]);
+        return view('dashboard.user.edit', ['user' => $user, 'departments' => $departments]);
     }
 
     /**
