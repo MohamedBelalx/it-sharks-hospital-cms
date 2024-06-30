@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\SurgeryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
@@ -17,8 +18,8 @@ use App\Http\Controllers\PharmacyController;
 |
 */
 
-Route::get('/', [UserController::class, 'main']);
-
+Route::get('/dashboard', [UserController::class, 'main']);
+Route::get('/', [MainController::class, 'index']);
 
 Route::group(['prefix' => 'department'], function () {
     Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');

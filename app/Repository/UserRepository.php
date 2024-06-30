@@ -41,4 +41,8 @@ class UserRepository implements IUserRepository
     {
         return User::where('role', $role->value)->count();
     }
+    public function getwithLimitAndRole(Roles $role, int $limit)
+    {
+        return User::where('role', $role->value)->limit($limit)->get();
+    }
 }
